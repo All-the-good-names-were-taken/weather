@@ -3,6 +3,14 @@
   font-family: Verdana, sans-serif;
 }
 
+.content {
+  width: 25rem;
+  margin: 0 auto;
+}
+
+#weather-items {
+  width: 100%;
+}
 #city,
 #current-time {
   margin: 1rem 0;
