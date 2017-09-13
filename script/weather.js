@@ -78,4 +78,6 @@
   document.getElementById( 'go-button' )
     .addEventListener( 'click', getData );
 
+  getData();
+
 } )()

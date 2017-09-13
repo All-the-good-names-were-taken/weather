@@ -29,3 +29,23 @@ td {
   padding: 1ex;
   border: 1px solid #ccc;
 }
+
+#go-button {
+  border: 1px solid #ddd;
+  border-radius: 0;
+  margin: 4ex auto;
+  padding: 1ex 2ex;
+  display: block;
+}
+
+#go-button:hover {
+  background-color: #eee;
+}
+
+#go-button:active {
+  background-color: #ccc;
+}
+
+#go-button:focus {
+  outline: 0;
+}
