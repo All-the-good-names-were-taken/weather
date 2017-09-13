@@ -31,19 +31,33 @@
     // of prototyping makes structure of document less obvious and arguably
     // more difficult to alter quickly.
     if ( data.main ) {
-      if ( data.main.temp ) {
+      if ( 'temp' in data.main ) {
         const el = document.getElementById( 'temperature-item' );
         el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.temp + ' \u00B0C';
       }
-      if ( data.main.humidity ) {
+      if ( 'humidity' in data.main ) {
         const el = document.getElementById( 'humidity-item' );
         el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.humidity + ' %';
       }
-      // TODO:  Pressure.
-      // TODO:  Wind (speed and direction).
-      // TODO:  Cloud cover.
-      // TODO:  Visibility.
+      if ( 'pressure' in data.main ) {
+        const el = document.getElementById( 'pressure-item' );
+        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.pressure + ' hPa';
+      }
     }
+
+    if ( data.clouds ) {
+      if ( 'all' in data.clouds ) {
+        const el = document.getElementById( 'cloud-item' );
+        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.clouds.all + ' %';
+      }
+    }
+
+    if ( 'visibility' in data ) {
+      const el = document.getElementById( 'visibility-item' );
+      el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.visibility + " m";
+    }
+
+    // TODO:  Wind (speed and direction).
 
   }
 
