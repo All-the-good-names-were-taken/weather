@@ -39,6 +39,16 @@
       }
     }
 
+    if ( data.weather.length ) {
+      // Capitalise description - not very localisable.
+      let description = data.weather[ 0 ].description;
+      description = description.charAt( 0 )
+        .toUpperCase() + description.slice( 1 );
+
+      document.getElementById( 'summary' )
+        .textContent = description;
+    }
+
     // TODO:  Perform this algorithmically to prevent repetition.
     // ASSUMPTION:  All units are metric.
     // TODO:  Paramaterise units to metric versus imperial.

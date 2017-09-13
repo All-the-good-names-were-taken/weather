@@ -11,8 +11,8 @@
 #weather-items {
   width: 100%;
 }
-#city,
-#current-time {
+
+.header-item {
   margin: 1rem 0;
 }
 
