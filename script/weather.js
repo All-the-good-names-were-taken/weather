@@ -2,6 +2,24 @@
 
   'use strict';
 
+  function compassDirectionFromBearing( bearing ) {
+    // Algorithm is to ensure the incoming angle is between 0 and
+    // 360 deg, and shift by half an interval to make the binning
+    // easier.  We can then do this without comparison operators.
+
+    const increment = 360 / 16;
+    bearing += ( increment / 2 );
+    while ( bearing < 0 ) {
+      bearing += 360;
+    }
+
+    const directions = [ 'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S',
+      'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'
+    ];
+
+    return directions[ Math.floor( bearing / increment ) ];
+  }
+
   function error() {
     console.log( 'Got error from data returned.' );
   }
@@ -57,7 +75,11 @@
       el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.visibility + " m";
     }
 
-    // TODO:  Wind (speed and direction).
+    if ( 'wind' in data ) {
+      const el = document.getElementById( 'wind-item' );
+      const value = data.wind.speed + ' m/s, ' + compassDirectionFromBearing( data.wind.deg );
+      el.getElementsByClassName( 'item-value' )[ 0 ].textContent = value;
+    }
 
   }
 
