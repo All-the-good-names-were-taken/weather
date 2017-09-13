@@ -19,12 +19,28 @@
       el.textContent = dateString;
     }
 
-    el = document.getElementById('temperature-item');
-
-    if (el && data.main) {
-      if (data.main.temp) {
-        el.getElementsByClassName('item-value')[0].textContent = data.main.temp + ' ' + '\u00B0C';
+    // TODO:  Perform this algorithmically to prevent repetition.
+    // ASSUMPTION:  All units are metric.
+    // TODO:  Paramaterise units to metric versus imperial.
+    // TODO:  Visibility - not all aspects are sent - e.g. if there's no snow
+    // then no snow data is sent.  Don't show items for which there is no data.
+    // TODO:  Could insert elements into table programmatically - decouples
+    // expectations of the script on the markup content, but in early stages
+    // of prototyping makes structure of document less obvious and arguably
+    // more difficult to alter quickly.
+    if ( el && data.main ) {
+      if ( data.main.temp ) {
+        el = document.getElementById( 'temperature-item' );
+        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.temp + ' ' + '\u00B0C';
       }
+      if ( data.main.humidity ) {
+        el = document.getElementById( 'humidity-item' );
+        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.humidity + ' ' + '%';
+      }
+      // TODO:  Pressure.
+      // TODO:  Wind (speed and direction).
+      // TODO:  Cloud cover.
+      // TODO:  Visibility.
     }
 
   }
