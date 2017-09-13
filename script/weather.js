@@ -10,13 +10,15 @@
 
     const data = JSON.parse( this.response ) || {};
 
-    let el = document.getElementById( 'current-time' );
+    {
+      const el = document.getElementById( 'current-time' );
 
-    if ( el && data.dt ) {
-      // Date is in seconds, not milliseconds.
-      const dateString = new Date( data.dt )
-        .toLocaleTimeString();
-      el.textContent = dateString;
+      if ( el && data.dt ) {
+        // Date is in seconds, not milliseconds.
+        const dateString = new Date( data.dt )
+          .toLocaleTimeString();
+        el.textContent = dateString;
+      }
     }
 
     // TODO:  Perform this algorithmically to prevent repetition.
@@ -28,14 +30,14 @@
     // expectations of the script on the markup content, but in early stages
     // of prototyping makes structure of document less obvious and arguably
     // more difficult to alter quickly.
-    if ( el && data.main ) {
+    if ( data.main ) {
       if ( data.main.temp ) {
-        el = document.getElementById( 'temperature-item' );
-        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.temp + ' ' + '\u00B0C';
+        const el = document.getElementById( 'temperature-item' );
+        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.temp + ' \u00B0C';
       }
       if ( data.main.humidity ) {
-        el = document.getElementById( 'humidity-item' );
-        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.humidity + ' ' + '%';
+        const el = document.getElementById( 'humidity-item' );
+        el.getElementsByClassName( 'item-value' )[ 0 ].textContent = data.main.humidity + ' %';
       }
       // TODO:  Pressure.
       // TODO:  Wind (speed and direction).
