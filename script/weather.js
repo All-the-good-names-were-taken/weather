@@ -1,24 +1,46 @@
 
-  function dataReceived() {
-    console.log( 'got data');
+(function() {
+
+  'use strict';
+
+  function error() {
+    console.log( 'Got error from data returned.');
+  }
+
+  function dataReceived(e) {
+
+    const data = JSON.parse( this.response ) || {};
+
+    let el = document.getElementById('current-time');
+
+    if (el && data.dt) {
+      // Date is in seconds, not milliseconds.
+      const dateString = new Date( data.dt ).toLocaleTimeString();
+      el.textContent = dateString;
+    }
+
+    el = document.getElementById('temperature-item');
+
+    if (el && data.main) {
+      if (data.main.temp) {
+        el.getElementsByClassName('item-value')[0].textContent = data.main.temp + ' ' + '\u00B0C';
+      }
+    }
+
   }
 
   function getData() {
-    console.log('got click');
     const req = new XMLHttpRequest();
 
-    // This is needed for the sample data endpoint, but not (apparently)
-    // for the live data.
-    req.withCredentials = true;
-
     req.addEventListener('load', dataReceived);
+    req.addEventListener('error', function() {console.log('error from request');})
 
-    // My API ID is http://api.openweathermap.org/data/2.5/forecast?id=2643743&APPID=f6347fd66d842b5f22cec8fb8851e4f8
-    // Don't use for testing - ten minute throttle and lock-out up to 24h.
-    // Sample data is http://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1
-    req.open('GET', 'http://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1', true);
+    req.open('GET', 'http://api.openweathermap.org/data/2.5/weather?units=metric&id=2643743&APPID=f6347fd66d842b5f22cec8fb8851e4f8');
 
+    req.setRequestHeader('Accept', 'application/json');
     req.send();
   }
 
   document.getElementById('go-button').addEventListener('click', getData);
+
+})()
