@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  font-family: Verdana, sans-serif;
+}
+
+#city,
+#current-time {
+  margin: 1rem 0;
+}
+
+#city {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  padding: 1ex;
+  border: 1px solid #ccc;
+}
